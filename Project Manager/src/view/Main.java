@@ -15,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         
+        //testando a conexao
         ConectaDB conn = new ConectaDB();
         conn.conexao();
     }
