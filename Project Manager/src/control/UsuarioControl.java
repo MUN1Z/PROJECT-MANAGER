@@ -35,7 +35,7 @@ public class UsuarioControl {
             Logger.getLogger(UsuarioControl.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao Conectar! \n Erro: " + ex.getMessage());
         }
-    
+        conecta.desconecta();
     }
     
     public void deletarUsuario(Usuario usuario){
@@ -47,14 +47,36 @@ public class UsuarioControl {
             String sql = "DELETE FROM usuario WHERE id = ?";
             PreparedStatement pst;
             pst = conecta.conn.prepareStatement(sql);
-            pst.setLong(1, usuario.getId());
+            pst.setLong(1, usuario.getId());//pegar id do usuario vindo do banco de dados
             pst.execute();
             JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioControl.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao deletar usuario! \n Erro: " + ex.getMessage());
         }
+        conecta.desconecta();
+    }
+    
+    public void editarUsuario(Usuario usuario){
         
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            String sql = "UPDATE usuario SET nome = ?, email = ?, login = ?, senha = ? WHERE id = ?";
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            pst.setString(1, usuario.getNomeCompleto());
+            pst.setString(2, usuario.getEmail());
+            pst.setString(3, usuario.getLogin());
+            pst.setString(4, usuario.getSenha());
+            pst.setLong(5, usuario.getId()); //pegar id do usuario vindo do banco de dados
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Editado com suceso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao editar usuario! " + ex.getMessage());
+        }
+        conecta.desconecta();
     }
     
 }
