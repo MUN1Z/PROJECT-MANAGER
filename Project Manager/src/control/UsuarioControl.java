@@ -3,7 +3,9 @@ package control;
 
 import DAO.ConectaDB;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,7 +17,17 @@ import modelo.Usuario;
  */
 public class UsuarioControl {
     
-    public void cadastrarUsuario(Usuario usuario){
+    private static UsuarioControl controladorUsuario;
+    //Singleton
+    public static UsuarioControl getInstance(){
+        if(controladorUsuario==null){
+            controladorUsuario = new UsuarioControl();
+            return controladorUsuario;
+        }
+        return controladorUsuario;
+    }
+    
+    public boolean cadastrarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -36,6 +48,7 @@ public class UsuarioControl {
             JOptionPane.showMessageDialog(null, "Erro ao Conectar! \n Erro: " + ex.getMessage());
         }
         conecta.desconecta();
+        return true;
     }
     
     public void deletarUsuario(Usuario usuario){
@@ -77,6 +90,32 @@ public class UsuarioControl {
             JOptionPane.showMessageDialog(null, "Erro ao editar usuario! " + ex.getMessage());
         }
         conecta.desconecta();
+    }
+    
+    public ArrayList<Usuario> listarUsuario(){
+        
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+            String sql = "SELECT * FROM usuario";
+            
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNomeCompleto(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setLogin(rs.getString("login"));
+                usuario.setSenha(rs.getString("senha"));
+                usuarios.add(usuario);
+            }
+            return usuarios;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
     
 }
