@@ -51,7 +51,7 @@ public class UsuarioControl {
         return true;
     }
     
-    public void deletarUsuario(Usuario usuario){
+    public boolean deletarUsuario(Usuario usuario){
     
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -68,9 +68,10 @@ public class UsuarioControl {
             JOptionPane.showMessageDialog(null, "Erro ao deletar usuario! \n Erro: " + ex.getMessage());
         }
         conecta.desconecta();
+        return true;
     }
     
-    public void editarUsuario(Usuario usuario){
+    public boolean editarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -90,6 +91,7 @@ public class UsuarioControl {
             JOptionPane.showMessageDialog(null, "Erro ao editar usuario! " + ex.getMessage());
         }
         conecta.desconecta();
+        return true;
     }
     
     public ArrayList<Usuario> listarUsuario(){
