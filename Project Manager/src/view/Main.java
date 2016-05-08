@@ -5,9 +5,9 @@
  */
 package view;
 
-import DAO.ConectaDB;
+import database.ConectaDB;
 import control.UsuarioControl;
-import modelo.Usuario;
+import model.Usuario;
 
 /**
  *

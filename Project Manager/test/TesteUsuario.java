@@ -1,9 +1,9 @@
 
-import DAO.ConectaDB;
+import database.ConectaDB;
 import com.mysql.jdbc.PreparedStatement;
 import control.UsuarioControl;
 import java.util.ArrayList;
-import modelo.Usuario;
+import model.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
