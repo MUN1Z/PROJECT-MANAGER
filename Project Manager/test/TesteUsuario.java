@@ -43,7 +43,7 @@ public class TesteUsuario {
     public void testeDeDetetarUsuario(){
         Usuario user = new Usuario();
         
-        user.setId(65);//informar id do usuario a ser deletado
+        user.setId(23);//informar id do usuario a ser deletado
         
         ArrayList<Usuario> usuarios = UsuarioControl.getInstance().listarUsuario();
         int tamanho = usuarios.size();
@@ -63,25 +63,18 @@ public class TesteUsuario {
         assertTrue(UsuarioControl.getInstance().editarUsuario(user));        
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+    @Test
+    public void testeDeListarUsuario(){
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+        
+        usuarios = UsuarioControl.getInstance().listarUsuario();
+        assertNotNull(usuarios);
+        
+        boolean contem = false;
+        if(usuarios.size() > 0){
+            contem = true;
+        }
+        assertTrue(contem);
+    }
 }
