@@ -5,6 +5,10 @@
  */
 package view;
 
+import control.UsuarioControl;
+import java.util.ArrayList;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author cabra
@@ -16,6 +20,35 @@ public class FrmUsuariosCadastrados extends javax.swing.JFrame {
      */
     public FrmUsuariosCadastrados() {
         initComponents();
+        preencherTabela();
+    }
+    public void preencherTabela(){
+        ArrayList dados = UsuarioControl.listarUsuario();
+        String[] colunas = new String[]{"ID", "Nome", "Email","Login", "Senha"};
+        
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        
+        jTableUsuario.setModel(modelo);
+        jTableUsuario.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jTableUsuario.getColumnModel().getColumn(0).setResizable(false);
+        
+        jTableUsuario.getColumnModel().getColumn(1).setPreferredWidth(258);
+        jTableUsuario.getColumnModel().getColumn(1).setResizable(false);
+        
+        jTableUsuario.getColumnModel().getColumn(2).setPreferredWidth(220);
+        jTableUsuario.getColumnModel().getColumn(2).setResizable(false);
+        
+        jTableUsuario.getColumnModel().getColumn(3).setPreferredWidth(120);
+        jTableUsuario.getColumnModel().getColumn(3).setResizable(false);
+        
+        jTableUsuario.getColumnModel().getColumn(4).setPreferredWidth(100);
+        jTableUsuario.getColumnModel().getColumn(4).setResizable(false);
+        
+        jTableUsuario.getTableHeader().setReorderingAllowed(false);
+        jTableUsuario.setAutoResizeMode(jTableUsuario.AUTO_RESIZE_OFF);
+        jTableUsuario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    
+    
     }
 
     /**
@@ -29,25 +62,25 @@ public class FrmUsuariosCadastrados extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableUsuario = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableUsuario);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,6 +169,6 @@ public class FrmUsuariosCadastrados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableUsuario;
     // End of variables declaration//GEN-END:variables
 }
