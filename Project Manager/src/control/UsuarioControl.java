@@ -27,7 +27,7 @@ public class UsuarioControl {
         return controladorUsuario;
     }
     
-    public boolean cadastrarUsuario(Usuario usuario){
+    public static boolean cadastrarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -51,7 +51,7 @@ public class UsuarioControl {
         return true;
     }
     
-    public boolean deletarUsuario(Usuario usuario){
+    public static boolean deletarUsuario(Usuario usuario){
     
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -71,7 +71,7 @@ public class UsuarioControl {
         return true;
     }
     
-    public boolean editarUsuario(Usuario usuario){
+    public static boolean editarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
@@ -94,7 +94,7 @@ public class UsuarioControl {
         return true;
     }
     
-    public ArrayList<Usuario> listarUsuario(){
+    public static ArrayList<Usuario> listarUsuario(){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
