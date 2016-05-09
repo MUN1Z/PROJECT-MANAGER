@@ -94,25 +94,24 @@ public class UsuarioControl {
         return true;
     }
     
-    public static ArrayList<Usuario> listarUsuario(){
+    public static ArrayList listarUsuario(){
         
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
         
         try {
-            ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+            ArrayList usuarios = new ArrayList();
             String sql = "SELECT * FROM usuario";
             
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("id"));
-                usuario.setNomeCompleto(rs.getString("nome"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setLogin(rs.getString("login"));
-                usuario.setSenha(rs.getString("senha"));
-                usuarios.add(usuario);
+                
+                usuarios.add(new Object[]{ rs.getInt("id"),
+                    rs.getString("nome"), 
+                    rs.getString("email"), 
+                    rs.getString("login"), 
+                    rs.getString("senha")});
             }
             return usuarios;
         } catch (SQLException ex) {
@@ -121,3 +120,11 @@ public class UsuarioControl {
     }
     
 }
+
+               // Usuario usuario = new Usuario();
+               // usuario.setId(rs.getInt("id"));
+                //usuario.setNomeCompleto(rs.getString("nome"));
+                //.setEmail(rs.getString("email"));
+                //usuario.setLogin(rs.getString("login"));
+               // usuario.setSenha(rs.getString("senha"));
+               // usuarios.add(usuario);
