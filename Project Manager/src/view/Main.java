@@ -30,8 +30,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuCadastrar = new javax.swing.JMenuItem();
+        jMenuListar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Project Manager");
@@ -52,13 +52,28 @@ public class Main extends javax.swing.JFrame {
 
         jMenu1.setText("Usuarios");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem1.setText("Cadastrar");
-        jMenu1.add(jMenuItem1);
+        jMenuCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuCadastrar.setText("Cadastrar");
+        jMenuCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastrarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCadastrar);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem2.setText("Listar");
-        jMenu1.add(jMenuItem2);
+        jMenuListar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuListar.setText("Listar");
+        jMenuListar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuListarMouseClicked(evt);
+            }
+        });
+        jMenuListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuListar);
 
         jMenuBar1.add(jMenu1);
 
@@ -78,6 +93,21 @@ public class Main extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(736, 548));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastrarActionPerformed
+        // TODO add your handling code here:
+        FrmCadastroUsuario frmCadUse = new FrmCadastroUsuario();
+        frmCadUse.setVisible(true);
+    }//GEN-LAST:event_jMenuCadastrarActionPerformed
+
+    private void jMenuListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarActionPerformed
+        FrmUsuariosCadastrados usc = new FrmUsuariosCadastrados();
+        usc.setVisible(true);
+    }//GEN-LAST:event_jMenuListarActionPerformed
+
+    private void jMenuListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuListarMouseClicked
+        
+    }//GEN-LAST:event_jMenuListarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -117,8 +147,8 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuCadastrar;
+    private javax.swing.JMenuItem jMenuListar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
