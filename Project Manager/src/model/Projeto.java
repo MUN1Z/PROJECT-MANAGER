@@ -14,6 +14,7 @@ public class Projeto {
     private Calendar dataDeFinalizacao;
     private Backlog backlog;
     
+    /*
     public Projeto(long id, String descricaoGeral) {
         this.id = id;
         this.descricaoGeral = descricaoGeral;
@@ -23,6 +24,11 @@ public class Projeto {
     public boolean finalizar(){
         dataDeFinalizacao = Calendar.getInstance();
         return true;
+    }*/
+    
+    public void dataIniDataFim(Calendar dataCriacao, Calendar dataFinalizacao){
+        this.dataDeCriacao = dataCriacao;
+        this.dataDeFinalizacao = dataFinalizacao;
     }
 
     public long getId() {
@@ -39,6 +45,20 @@ public class Projeto {
 
     public void setDescricaoGeral(String descricaoGeral) {
         this.descricaoGeral = descricaoGeral;
+    }
+
+
+    public Calendar getDataDeCriacao() {
+        return dataDeCriacao;
+    }
+
+
+    public Calendar getDataDeFinalizacao() {
+        return dataDeFinalizacao;
+    }
+
+    public void setDataDeFinalizacao(Calendar dataDeFinalizacao) {
+        this.dataDeFinalizacao = dataDeFinalizacao;
     }
 
     public Backlog getBacklog() {
