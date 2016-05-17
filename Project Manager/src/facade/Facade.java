@@ -5,8 +5,10 @@
  */
 package facade;
 
+import control.ProjetoControl;
 import control.UsuarioControl;
 import java.util.ArrayList;
+import model.Projeto;
 import model.Usuario;
 
 /**
@@ -55,4 +57,12 @@ public class Facade {
         return UsuarioControl.listarUsuario();
     }
     
+    /**
+     * Método responsável por cadastrar um projeto no banco de dados, recebe
+     * como parametro um objeto do tipo Projeto
+     * @author Raiff
+     */
+    public static boolean cadastrarProjeto(Projeto projeto){
+        return ProjetoControl.cadastrarProjeto(projeto);
+    }
 }

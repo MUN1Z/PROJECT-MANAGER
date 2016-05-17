@@ -27,6 +27,13 @@ public class UsuarioControl {
         return controladorUsuario;
     }
     
+    /**
+     * Método que recebe os atributos do usuário e faz a inserção dos dados
+     * no banco, O método recebe como parametro um objeto do tipo Usuario.
+     * @author Raiff
+     * @param usuario
+     * @return true
+     */
     public static boolean cadastrarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
@@ -51,6 +58,13 @@ public class UsuarioControl {
         return true;
     }
     
+    /**
+     * Método responsável por deletar um usuário que esteja cadastrado no
+     * banco de dados, o método recebe como parametro um objeto do tipo Usuario
+     * @author Raiff
+     * @param usuario
+     * @return true
+     */
     public static boolean deletarUsuario(Usuario usuario){
     
         ConectaDB conecta = new ConectaDB();
@@ -60,7 +74,7 @@ public class UsuarioControl {
             String sql = "DELETE FROM usuario WHERE id = ?";
             PreparedStatement pst;
             pst = conecta.conn.prepareStatement(sql);
-            pst.setLong(1, usuario.getId());//pegar id do usuario vindo do banco de dados
+            pst.setLong(1, usuario.getId()); //pegar id do usuario vindo do banco de dados
             pst.execute();
             JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
         } catch (SQLException ex) {
@@ -71,6 +85,13 @@ public class UsuarioControl {
         return true;
     }
     
+    /**
+     * Método responsável por editar valores ja cadastrados no banco de dados,
+     * o método recebe como parametro um objeto do tipo Usuario
+     * @author Raiff
+     * @param usuario
+     * @return true
+     */
     public static boolean editarUsuario(Usuario usuario){
         
         ConectaDB conecta = new ConectaDB();
@@ -94,6 +115,12 @@ public class UsuarioControl {
         return true;
     }
     
+    /**
+     * Método responsável por retornar dados do banco referente a tabela usuario,
+     * o método retorna um ArrayList de objetos do tipo usuario.
+     * @author Raiff
+     * @return ArrayList
+     */
     public static ArrayList listarUsuario(){
         
         ConectaDB conecta = new ConectaDB();
