@@ -51,12 +51,16 @@ PRIMARY KEY (`id`)
 CREATE TABLE `backlog` (
 
 `id` int(11) NOT NULL AUTO_INCREMENT,
+`id_projeto` int(11) NOT NULL,
 
 `data_criacao` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
 
 `data_modificacao` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
 
-PRIMARY KEY (`id`) 
+PRIMARY KEY (`id`),
+INDEX(id_projeto),
+
+CONSTRAINT fk_projeto_backlog FOREIGN KEY(id_projeto) REFERENCES projeto(id)
 
 );
 
