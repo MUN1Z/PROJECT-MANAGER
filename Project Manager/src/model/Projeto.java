@@ -12,7 +12,6 @@ public class Projeto {
     private String descricaoGeral;
     private Calendar dataDeCriacao;
     private Calendar dataDeFinalizacao;
-    private Backlog backlog;
     
     /*
     public Projeto(long id, String descricaoGeral) {
@@ -61,13 +60,6 @@ public class Projeto {
         this.dataDeFinalizacao = dataDeFinalizacao;
     }
 
-    public Backlog getBacklog() {
-        return backlog;
-    }
-
-    public void setBacklog(Backlog backlog) {
-        this.backlog = backlog;
-    }
     
     
 
