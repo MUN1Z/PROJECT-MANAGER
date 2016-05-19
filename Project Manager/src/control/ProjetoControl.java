@@ -44,8 +44,8 @@ public class ProjetoControl {
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
             pst.setString(1, null);
             pst.setString(2, projeto.getDescricaoGeral());
-            pst.setTime(3, null, projeto.getDataDeCriacao());
-            pst.setDate(4, null, projeto.getDataDeFinalizacao());
+            pst.setDate(3, (Date) projeto.getDataDeCriacao());
+            pst.setDate(4, (Date) projeto.getDataDeFinalizacao());
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProjetoControl.class.getName()).log(Level.SEVERE, null, ex);
