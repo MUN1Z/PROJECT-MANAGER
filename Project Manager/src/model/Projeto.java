@@ -42,6 +42,11 @@ public class Projeto {
         return descricaoGeral;
     }
 
+    public void setDataDeCriacao(Calendar dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
+    
+
     public void setDescricaoGeral(String descricaoGeral) {
         this.descricaoGeral = descricaoGeral;
     }

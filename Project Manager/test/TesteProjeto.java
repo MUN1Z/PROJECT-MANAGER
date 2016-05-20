@@ -6,9 +6,12 @@
 
 import control.ProjetoControl;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Projeto;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,9 +34,25 @@ public class TesteProjeto {
     public void cadastrarProjeto(){
         
         Projeto projeto = new Projeto();
-        Calendar c = Calendar.getInstance();                
+        //Calendar c = Calendar.getInstance();
+        
+        DateFormat f = DateFormat.getDateInstance();
+            
+        Date d = new Date();
+        try {
+            d = f.parse("12/01/2016");
+        } catch (ParseException ex) {
+            Logger.getLogger(TesteProjeto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                Calendar c = Calendar.getInstance();
+                //c.setTime(d);
+ 
+                DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+                System.out.println( df.format(c.getTime()) );
+        
         projeto.setDescricaoGeral("my first projet");
-        projeto.dataIniDataFim(c, c);
+        projeto.setDataDeCriacao(c);
+        //projeto.dataIniDataFim(c.getTimeInMillis(), c);
         System.out.println("data ini " + projeto.getDataDeCriacao());
         ProjetoControl.cadastrarProjeto(projeto);
         

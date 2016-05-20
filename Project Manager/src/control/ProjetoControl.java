@@ -4,7 +4,9 @@ package control;
 import database.ConectaDB;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Projeto;
@@ -54,15 +56,34 @@ public class ProjetoControl {
         return true;    
     }
     
-    public void deletarProjeto(){
-    
+    public static boolean deletarProjeto(){
+        return true;
     }
     
-    public void editarProjeto(){
-    
+    public static boolean editarProjeto(){
+        return true;
     }
     
-    public void listarProjeto(){
-    
+    public static ArrayList listarProjeto(){
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            ArrayList projeto = new ArrayList();
+            String sql = "SELECT * FROM projeto";
+            
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                
+                projeto.add(new Object[]{ rs.getInt("id"),
+                    rs.getString("descricaoGeral"), 
+                    rs.getString("dataDeCriacao"), 
+                    rs.getString("dataDeFinalizacao")});
+            }
+            return projeto;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
