@@ -41,13 +41,14 @@ public class ProjetoControl {
     public static boolean cadastrarProjeto(Projeto projeto){
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
+        String sql = "INSERT INTO projeto() VALUES(?,?,?,?)";
         try {
-            String sql = "INSERT INTO projeto() VALUES(?,?,?,?)";
+            
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
             pst.setString(1, null);
             pst.setString(2, projeto.getDescricaoGeral());
-            pst.setDate(3, (Date) projeto.getDataDeCriacao());
-            pst.setDate(4, (Date) projeto.getDataDeFinalizacao());
+            pst.setString(3, projeto.getDataDeCriacao());
+            pst.setString(4, projeto.getDataDeFinalizacao());
             pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProjetoControl.class.getName()).log(Level.SEVERE, null, ex);
