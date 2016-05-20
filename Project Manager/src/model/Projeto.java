@@ -10,8 +10,8 @@ import java.util.Calendar;
 public class Projeto {
     private long id;
     private String descricaoGeral;
-    private Calendar dataDeCriacao;
-    private Calendar dataDeFinalizacao;
+    private String dataDeCriacao;
+    private String dataDeFinalizacao;
     
     /*
     public Projeto(long id, String descricaoGeral) {
@@ -24,11 +24,6 @@ public class Projeto {
         dataDeFinalizacao = Calendar.getInstance();
         return true;
     }*/
-    
-    public void dataIniDataFim(Calendar dataCriacao, Calendar dataFinalizacao){
-        this.dataDeCriacao = dataCriacao;
-        this.dataDeFinalizacao = dataFinalizacao;
-    }
 
     public long getId() {
         return id;
@@ -42,29 +37,27 @@ public class Projeto {
         return descricaoGeral;
     }
 
-    public void setDataDeCriacao(Calendar dataDeCriacao) {
-        this.dataDeCriacao = dataDeCriacao;
-    }
-    
-
     public void setDescricaoGeral(String descricaoGeral) {
         this.descricaoGeral = descricaoGeral;
     }
 
-
-    public Calendar getDataDeCriacao() {
+    public String getDataDeCriacao() {
         return dataDeCriacao;
     }
 
+    public void setDataDeCriacao(String dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
 
-    public Calendar getDataDeFinalizacao() {
+    public String getDataDeFinalizacao() {
         return dataDeFinalizacao;
     }
 
-    public void setDataDeFinalizacao(Calendar dataDeFinalizacao) {
+    public void setDataDeFinalizacao(String dataDeFinalizacao) {
         this.dataDeFinalizacao = dataDeFinalizacao;
     }
-
+    
+  
     
     
 
