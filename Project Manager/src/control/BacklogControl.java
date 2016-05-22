@@ -3,7 +3,9 @@ package control;
 
 import database.ConectaDB;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -110,7 +112,30 @@ public class BacklogControl {
         return true;
     }
     
-    public void listarBacklog(){
-    
+    /**
+     * Método responsávem por listar todos os backlogs do banco de dados.
+     * @author Felipe Muniz
+     * @return ArrayList
+     */
+    public static ArrayList listarBacklog(){
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            ArrayList backlogs = new ArrayList();
+            String sql = "SELECT * FROM backlog";
+            
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                
+                backlogs.add(new Object[]{ rs.getInt("id"),
+                    rs.getString("data_criacao"),
+                    rs.getString("data_modificacao")});
+            }
+            return backlogs;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
