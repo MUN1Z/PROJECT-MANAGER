@@ -1,3 +1,7 @@
+CREATE SCHEMA gap;
+
+USE gap;
+
 CREATE TABLE `usuario` (
 
 `id` int(11) NOT NULL auto_increment,
