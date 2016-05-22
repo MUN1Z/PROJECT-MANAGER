@@ -83,8 +83,31 @@ public class BacklogControl {
         return true;
     }
     
-    public void editarBacklog(){
-    
+    /**
+     * Método responsávem por editar um backlog no banco de dados.
+     * O método recebe como parametro um objeto do tipo Backlog.
+     * @author Felipe Muniz
+     * @param backlog
+     * @return boolean
+     */
+    public static boolean editarBacklog(Backlog backlog){
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            String sql = "UPDATE backlog SET data_criacao = ?, data_modificacao = ? WHERE id = ?";
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            pst.setString(1, backlog.getDataDeCriacao().toString());
+            pst.setString(2, backlog.getDataUltimaModificacao().toString());
+            pst.setLong(3, backlog.getId());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Editado com suceso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao editar Backlog! " + ex.getMessage());
+        }
+        conecta.desconecta();
+        return true;
     }
     
     public void listarBacklog(){
