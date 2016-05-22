@@ -95,4 +95,13 @@ public class Facade {
         return BacklogControl.editarBacklog(backlog);
     }
     
+    /**
+     * Método responsável por Listar todos os Backlogs do banco de dados, recebe
+     * Retorna um ArrayList
+     * @author Felipe Muniz
+     */
+    public static ArrayList<Backlog> ListarBacklog(Backlog backlog){
+        return BacklogControl.listarBacklog();
+    }
+    
 }
