@@ -5,9 +5,11 @@
  */
 package facade;
 
+import control.BacklogControl;
 import control.ProjetoControl;
 import control.UsuarioControl;
 import java.util.ArrayList;
+import model.Backlog;
 import model.Projeto;
 import model.Usuario;
 
@@ -64,5 +66,14 @@ public class Facade {
      */
     public static boolean cadastrarProjeto(Projeto projeto){
         return ProjetoControl.cadastrarProjeto(projeto);
+    }
+    
+    /**
+     * Método responsável por cadastrar um projeto no banco de dados, recebe
+     * como parametro um objeto do tipo Projeto
+     * @author Felipe Muniz
+     */
+    public static boolean cadastrarBacklog(Backlog backlog){
+        return BacklogControl.cadastrarBacklog(backlog);
     }
 }
