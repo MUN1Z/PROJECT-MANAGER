@@ -69,11 +69,20 @@ public class Facade {
     }
     
     /**
-     * Método responsável por cadastrar um projeto no banco de dados, recebe
-     * como parametro um objeto do tipo Projeto
+     * Método responsável por cadastrar um Backlog no banco de dados, recebe
+     * como parametro um objeto do tipo Backlog
      * @author Felipe Muniz
      */
     public static boolean cadastrarBacklog(Backlog backlog){
         return BacklogControl.cadastrarBacklog(backlog);
+    }
+    
+    /**
+     * Método responsável por deletar um Backlog no banco de dados, recebe
+     * como parametro um objeto do tipo Backlog
+     * @author Felipe Muniz
+     */
+    public static boolean DeletarBacklog(Backlog backlog){
+        return BacklogControl.deletarBacklog(backlog);
     }
 }
