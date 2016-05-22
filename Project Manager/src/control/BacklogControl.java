@@ -29,7 +29,7 @@ public class BacklogControl {
     
     /**
      * Método responsávem por cadastrar um backlog no banco de dados.
-     * O método recebe como parametro um objeto do tipo Usuario.
+     * O método recebe como parametro um objeto do tipo Backlog.
      * @author Felipe Muniz
      * @param backlog
      * @return boolean
@@ -56,8 +56,31 @@ public class BacklogControl {
         return true;
     }
     
-    public void deletarBacklog(){
-    
+    /**
+     * Método responsávem por deletar um backlog no banco de dados.
+     * O método recebe como parametro um objeto do tipo Backlog.
+     * @author Felipe Muniz
+     * @param backlog
+     * @return boolean
+     */
+    public static boolean deletarBacklog(Backlog backlog){
+        
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        
+        try {
+            String sql = "DELETE FROM backlog WHERE id = ?";
+            PreparedStatement pst;
+            pst = conecta.conn.prepareStatement(sql);
+            pst.setLong(1, backlog.getId()); 
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Deletado com sucesso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao deletar Backlog! \n Erro: " + ex.getMessage());
+        }
+        conecta.desconecta();
+        return true;
     }
     
     public void editarBacklog(){
