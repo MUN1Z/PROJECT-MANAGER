@@ -85,4 +85,14 @@ public class Facade {
     public static boolean DeletarBacklog(Backlog backlog){
         return BacklogControl.deletarBacklog(backlog);
     }
+    
+    /**
+     * Método responsável por editar um Backlog no banco de dados, recebe
+     * como parametro um objeto do tipo Backlog
+     * @author Felipe Muniz
+     */
+    public static boolean EditarBacklog(Backlog backlog){
+        return BacklogControl.editarBacklog(backlog);
+    }
+    
 }
