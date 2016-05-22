@@ -77,6 +77,18 @@ public class FrmCadastroProjeto extends javax.swing.JFrame {
             }
         });
 
+        jFormattedDataCria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedDataCriaActionPerformed(evt);
+            }
+        });
+
+        jFormattedDataFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedDataFinalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,6 +181,14 @@ public class FrmCadastroProjeto extends javax.swing.JFrame {
         
         Facade.cadastrarProjeto(proj);
     }//GEN-LAST:event_jButtonOkActionPerformed
+
+    private void jFormattedDataCriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedDataCriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedDataCriaActionPerformed
+
+    private void jFormattedDataFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedDataFinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedDataFinalActionPerformed
 
     /**
      * @param args the command line arguments

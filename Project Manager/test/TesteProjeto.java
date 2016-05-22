@@ -5,9 +5,11 @@
  */
 
 import control.ProjetoControl;
+import facade.Facade;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -33,29 +35,19 @@ public class TesteProjeto {
     @Test
     public void cadastrarProjeto(){
         
-        Projeto projeto = new Projeto();
-        //Calendar c = Calendar.getInstance();
+        Projeto p = new Projeto();
         
-        DateFormat f = DateFormat.getDateInstance();
-            
-        Date d = new Date();
-        try {
-            d = f.parse("12/01/2016");
-        } catch (ParseException ex) {
-            Logger.getLogger(TesteProjeto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                Calendar c = Calendar.getInstance();
-                //c.setTime(d);
- 
-                DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-                System.out.println( df.format(c.getTime()) );
+        ArrayList<Projeto> projetos = ProjetoControl.listarProjeto();
         
-        projeto.setDescricaoGeral("my first projet");
-        projeto.setDataDeCriacao(c);
-        //projeto.dataIniDataFim(c.getTimeInMillis(), c);
-        System.out.println("data ini " + projeto.getDataDeCriacao());
-        ProjetoControl.cadastrarProjeto(projeto);
+        int tamanho = projetos.size();
+
+        p.setDescricaoGeral("Nome do projeto 2");
+        p.setDataDeCriacao("20/05/2016");
+        p.setDataDeFinalizacao("20/06/2016");
+        Facade.cadastrarProjeto(p);
         
+        projetos = ProjetoControl.listarProjeto();
+        assertEquals(tamanho+1, projetos.size());
     }
     
     @BeforeClass

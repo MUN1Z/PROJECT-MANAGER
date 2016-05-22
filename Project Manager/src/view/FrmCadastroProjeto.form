@@ -157,8 +157,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedDataCria">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedDataCriaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedDataFinal">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedDataFinalActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

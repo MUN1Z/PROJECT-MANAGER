@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Projeto;
 
 /**
@@ -42,6 +44,9 @@ public class ProjetoControl {
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
         String sql = "INSERT INTO projeto() VALUES(?,?,?,?)";
+        
+        
+        
         try {
             
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
@@ -50,11 +55,13 @@ public class ProjetoControl {
             pst.setString(3, projeto.getDataDeCriacao());
             pst.setString(4, projeto.getDataDeFinalizacao());
             pst.execute();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         } catch (SQLException ex) {
             Logger.getLogger(ProjetoControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Conectar! \n Erro: " + ex.getMessage());
         }
         conecta.desconecta();
-        return true;    
+        return true;
     }
     
     public static boolean deletarProjeto(){
@@ -78,9 +85,9 @@ public class ProjetoControl {
             while(rs.next()){
                 
                 projeto.add(new Object[]{ rs.getInt("id"),
-                    rs.getString("descricaoGeral"), 
-                    rs.getString("dataDeCriacao"), 
-                    rs.getString("dataDeFinalizacao")});
+                    rs.getString("descricao"), 
+                    rs.getString("data_criacao"), 
+                    rs.getString("data_final")});
             }
             return projeto;
         } catch (SQLException ex) {
