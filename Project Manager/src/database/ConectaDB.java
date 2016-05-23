@@ -23,7 +23,7 @@ public class ConectaDB {
     private String driver = "com.mysql.jdbc.Driver";
     private String caminho = "jdbc:mysql://localhost:3306/gap";// MYDB é o nome do provavel banco
     private String usuario = "root";
-    private String senha = "123";
+    private String senha = "";
     public Connection conn;
 	
 	public void conexao(){
