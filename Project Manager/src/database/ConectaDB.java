@@ -19,12 +19,12 @@ import javax.swing.JOptionPane;
 public class ConectaDB {
     
     public Statement stm;
-	public  ResultSet rs;
-	private String driver = "com.mysql.jdbc.Driver";
-	private String caminho = "jdbc:mysql://localhost:3306/gap";// MYDB é o nome do provavel banco
-	private String usuario = "root";
-	private String senha = "";
-	public Connection conn;
+    public  ResultSet rs;
+    private String driver = "com.mysql.jdbc.Driver";
+    private String caminho = "jdbc:mysql://localhost:3306/gap";// MYDB é o nome do provavel banco
+    private String usuario = "root";
+    private String senha = "123";
+    public Connection conn;
 	
 	public void conexao(){
 		
@@ -44,4 +44,5 @@ public class ConectaDB {
 			JOptionPane.showMessageDialog(null, "Erro ao fechar conexao com banco de dados! \n Erro:" + e.getMessage());
 		}
 	}
+       
 }

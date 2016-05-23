@@ -41,13 +41,14 @@ public class BacklogControl {
         ConectaDB conecta = new ConectaDB();
         conecta.conexao();
         
-        String sql = "INSERT INTO backlog() VALUES(?,?,?)";
+        String sql = "INSERT INTO backlog() VALUES(?,?,?,?)";
         
         try {
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
             pst.setString(1, null);
-            pst.setString(2, backlog.getDataDeCriacao().toString());
-            pst.setString(3, backlog.getDataUltimaModificacao().toString());
+            pst.setString(2, backlog.getDataDeCriacao());
+            pst.setString(3, backlog.getDataUltimaModificacao());
+            pst.setInt(4, backlog.getId_projeto());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         } catch (SQLException ex) {

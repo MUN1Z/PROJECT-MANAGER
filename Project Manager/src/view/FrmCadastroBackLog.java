@@ -5,6 +5,23 @@
  */
 package view;
 
+import control.BacklogControl;
+import control.ProjetoControl;
+import control.UsuarioControl;
+import database.ConectaDB;
+import facade.Facade;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import model.Backlog;
+
 /**
  *
  * @author cabra
@@ -14,8 +31,21 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
     /**
      * Creates new form FrmCadastroBackLog
      */
+    ConectaDB conecta = new ConectaDB();
+    
     public FrmCadastroBackLog() {
         initComponents();
+        
+        try {
+            MaskFormatter formato = new MaskFormatter("##/##/####");
+            jFormattedDataCriacao.setFormatterFactory(new DefaultFormatterFactory(formato));
+            formato = new MaskFormatter("##/##/####");
+            jFormattedDataModifica.setFormatterFactory(new DefaultFormatterFactory(formato));
+           
+        } catch (Exception e) {
+            
+        }
+        preencherTabela();
     }
 
     /**
@@ -30,14 +60,14 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jButtonCadastrar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jFormattedDataCriacao = new javax.swing.JFormattedTextField();
+        jFormattedDataModifica = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldIdProj = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableProjeto = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,13 +79,23 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
 
         jLabel2.setText("Ultima modificação:");
 
-        jButton1.setText("Cadastrar");
+        jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Sair");
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Projeto:");
+        jLabel3.setText("Identificador do projeto:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -66,7 +106,12 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableProjeto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProjetoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableProjeto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,20 +125,20 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldIdProj, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jFormattedDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(250, Short.MAX_VALUE))
+                                .addComponent(jFormattedDataModifica, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(455, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -106,19 +151,19 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedDataModifica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldIdProj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonCadastrar)
+                    .addComponent(jButtonSair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                 .addContainerGap())
@@ -151,12 +196,55 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setBounds(0, 0, 800, 450);
+        setSize(new java.awt.Dimension(800, 450));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jTableProjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProjetoMouseClicked
+        String identificador = "" +jTableProjeto.getValueAt(jTableProjeto.getSelectedRow(), 0);
+        
+        jTextFieldIdProj.setText(identificador);
+    
+    }//GEN-LAST:event_jTableProjetoMouseClicked
+
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        Backlog back = new Backlog();
+        back.setDataDeCriacao(jFormattedDataCriacao.getText());
+        back.setDataUltimaModificacao(jFormattedDataModifica.getText());
+        back.setId_projeto(Integer.valueOf(jTextFieldIdProj.getText()));
+        
+        Facade.cadastrarBacklog(back);
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    public void preencherTabela(){
+        ArrayList dados = ProjetoControl.listarProjeto();
+        String[] colunas = new String[]{"ID", "Descrição", "Criação","Finalização"};
+        
+        ModeloTabela modelo = new ModeloTabela(dados, colunas);
+        
+        jTableProjeto.setModel(modelo);
+        jTableProjeto.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jTableProjeto.getColumnModel().getColumn(0).setResizable(false);
+        
+        jTableProjeto.getColumnModel().getColumn(1).setPreferredWidth(395);
+        jTableProjeto.getColumnModel().getColumn(1).setResizable(false);
+        
+        jTableProjeto.getColumnModel().getColumn(2).setPreferredWidth(165);
+        jTableProjeto.getColumnModel().getColumn(2).setResizable(false);
+        
+        jTableProjeto.getColumnModel().getColumn(3).setPreferredWidth(165);
+        jTableProjeto.getColumnModel().getColumn(3).setResizable(false);
+       
+        jTableProjeto.getTableHeader().setReorderingAllowed(false);
+        jTableProjeto.setAutoResizeMode(jTableProjeto.AUTO_RESIZE_OFF);
+        jTableProjeto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    
+    
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -190,17 +278,17 @@ public class FrmCadastroBackLog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JButton jButtonCadastrar;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JFormattedTextField jFormattedDataCriacao;
+    private javax.swing.JFormattedTextField jFormattedDataModifica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableProjeto;
+    private javax.swing.JTextField jTextFieldIdProj;
     // End of variables declaration//GEN-END:variables
 }

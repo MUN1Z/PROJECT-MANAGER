@@ -167,6 +167,7 @@ public class FrmCadastroProjeto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -180,6 +181,7 @@ public class FrmCadastroProjeto extends javax.swing.JFrame {
         proj.setDataDeFinalizacao(jFormattedDataFinal.getText());
         
         Facade.cadastrarProjeto(proj);
+        this.dispose();
     }//GEN-LAST:event_jButtonOkActionPerformed
 
     private void jFormattedDataCriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedDataCriaActionPerformed

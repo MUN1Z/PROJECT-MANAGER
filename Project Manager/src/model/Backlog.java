@@ -9,28 +9,10 @@ import java.util.Calendar;
  */
 public class Backlog {
     private long id;
-    private Calendar dataDeCriacao;
-    private Calendar dataUltimaModificacao;
-    private ArrayList<UserStory> userStories;
-    
-    public Backlog(long id) {
-        this.id = id;
-        dataDeCriacao = Calendar.getInstance();
-        userStories = new ArrayList<UserStory>();
-    }
+    private String dataDeCriacao;
+    private String dataUltimaModificacao;
+    private int id_projeto;
 
-    public void salvarModificacoes(){
-        dataUltimaModificacao = Calendar.getInstance();
-    }
-    
-    public void adicionarUS(UserStory us){
-        userStories.add(us);
-    }
-    
-    public void removerUS(UserStory us){
-        userStories.remove(us);
-    }
-    
     public long getId() {
         return id;
     }
@@ -39,11 +21,29 @@ public class Backlog {
         this.id = id;
     }
 
-    public Calendar getDataDeCriacao() {
+    public String getDataDeCriacao() {
         return dataDeCriacao;
     }
 
-    public Calendar getDataUltimaModificacao() {
+    public void setDataDeCriacao(String dataDeCriacao) {
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    public String getDataUltimaModificacao() {
         return dataUltimaModificacao;
     }
+
+    public void setDataUltimaModificacao(String dataUltimaModificacao) {
+        this.dataUltimaModificacao = dataUltimaModificacao;
+    }
+
+    public int getId_projeto() {
+        return id_projeto;
+    }
+
+    public void setId_projeto(int id_projeto) {
+        this.id_projeto = id_projeto;
+    }
+    
+    
 }
