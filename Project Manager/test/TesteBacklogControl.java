@@ -53,7 +53,6 @@ public class TesteBacklogControl {
         conecta.conexao();
 
         int id_projeto;
-
         try {
             String sql = "SELECT * FROM projeto where descricao='Projeto de Teste JUnit'";
 
