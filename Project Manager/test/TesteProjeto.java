@@ -44,10 +44,24 @@ public class TesteProjeto {
         p.setDescricaoGeral("Nome do projeto 2");
         p.setDataDeCriacao("20/05/2016");
         p.setDataDeFinalizacao("20/06/2016");
-        Facade.cadastrarProjeto(p);
+        assertTrue(Facade.cadastrarProjeto(p));
         
         projetos = ProjetoControl.listarProjeto();
         assertEquals(tamanho+1, projetos.size());
+    }
+    
+    @Test
+    public void testeDeDeletarProjeto(){
+        
+        Projeto p = new Projeto();
+        
+        ArrayList<Projeto> projetos = ProjetoControl.listarProjeto();
+        int tamanho = projetos.size();
+                
+        assertTrue(ProjetoControl.deletarProjeto(p));
+        projetos = ProjetoControl.listarProjeto();
+        
+        assertEquals(tamanho-1, projetos.size());
     }
     
     @BeforeClass
