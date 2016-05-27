@@ -45,8 +45,6 @@ public class ProjetoControl {
         conecta.conexao();
         String sql = "INSERT INTO projeto() VALUES(?,?,?,?)";
         
-        
-        
         try {
             
             PreparedStatement pst = conecta.conn.prepareStatement(sql);
