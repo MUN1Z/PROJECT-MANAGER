@@ -62,7 +62,22 @@ public class ProjetoControl {
         return true;
     }
     
-    public static boolean deletarProjeto(){
+    public static boolean deletarProjeto(Projeto projeto){
+        
+        ConectaDB conecta = new ConectaDB();
+        conecta.conexao();
+        String sql = "DELETE FROM projeto WHERE id = ?";
+        
+        try {
+            PreparedStatement pst = conecta.conn.prepareStatement(sql);
+            pst.setLong(1, projeto.getId());
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjetoControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Conectar! \n Erro: " + ex.getMessage());
+        }
+        
+        
         return true;
     }
     
