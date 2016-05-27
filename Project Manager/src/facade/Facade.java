@@ -69,6 +69,19 @@ public class Facade {
     }
     
     /**
+     * Método resposável por deletar um projeto no banco de dados, recebe
+     * como parametro um objeto do tipo Projeto
+     * @author Raiff
+     */
+    public static boolean deletarProjeto(Projeto projeto){
+        return ProjetoControl.deletarProjeto(projeto);
+    }
+    
+    public static ArrayList<Projeto> listarProjeto(){
+       return ProjetoControl.listarProjeto();
+    }
+    
+    /**
      * Método responsável por cadastrar um Backlog no banco de dados, recebe
      * como parametro um objeto do tipo Backlog
      * @author Felipe Muniz
@@ -100,7 +113,7 @@ public class Facade {
      * Retorna um ArrayList
      * @author Felipe Muniz
      */
-    public static ArrayList<Backlog> ListarBacklog(Backlog backlog){
+    public static ArrayList<Backlog> ListarBacklog(){
         return BacklogControl.listarBacklog();
     }
     
