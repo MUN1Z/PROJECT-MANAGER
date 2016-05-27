@@ -37,7 +37,7 @@ public class TesteProjeto {
         
         Projeto p = new Projeto();
         
-        ArrayList<Projeto> projetos = ProjetoControl.listarProjeto();
+        ArrayList<Projeto> projetos = Facade.listarProjeto();
         
         int tamanho = projetos.size();
 
@@ -46,7 +46,7 @@ public class TesteProjeto {
         p.setDataDeFinalizacao("20/06/2016");
         assertTrue(Facade.cadastrarProjeto(p));
         
-        projetos = ProjetoControl.listarProjeto();
+        projetos = Facade.listarProjeto();
         assertEquals(tamanho+1, projetos.size());
     }
     
@@ -55,13 +55,28 @@ public class TesteProjeto {
         
         Projeto p = new Projeto();
         
-        ArrayList<Projeto> projetos = ProjetoControl.listarProjeto();
+        ArrayList<Projeto> projetos = Facade.listarProjeto();
         int tamanho = projetos.size();
                 
-        assertTrue(ProjetoControl.deletarProjeto(p));
-        projetos = ProjetoControl.listarProjeto();
+        assertTrue(Facade.deletarProjeto(p));
+        projetos = Facade.listarProjeto();
         
         assertEquals(tamanho-1, projetos.size());
+    }
+    
+    @Test
+    public void testeDeListarProjeto(){
+    
+        ArrayList<Projeto> projetos = Facade.listarProjeto();
+                
+        assertNotNull(projetos);
+        
+        boolean contem = false;
+        if(projetos.size() > 0){
+            contem = true;
+        }
+        assertTrue(contem);
+        
     }
     
     @BeforeClass
