@@ -8,7 +8,7 @@ class UserStory {
     private long id;
     private String descricao;
     private int peso;
-    private String prioridade;  // poderia ser um enum!
+    private String prioridade; 
     private Usuario dono;
 
     public UserStory(long id, String descricao, int peso, String prioridade, Usuario dono) {
