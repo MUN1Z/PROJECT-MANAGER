@@ -66,7 +66,11 @@ public class TesteProjeto {
     
     @Test
     public void testeDeEditarProjeto(){
+        Projeto p = new Projeto();
         
+        p.setId(40);
+        p.setDescricaoGeral("Teste de Descrição");
+        assertTrue(Facade.editarProjeto(p));
     }
     
     @Test
