@@ -77,6 +77,10 @@ public class Facade {
         return ProjetoControl.deletarProjeto(projeto);
     }
     
+    public static boolean editarProjeto(Projeto projeto){
+        return ProjetoControl.editarProjeto(projeto);
+    }
+    
     public static ArrayList<Projeto> listarProjeto(){
        return ProjetoControl.listarProjeto();
     }
