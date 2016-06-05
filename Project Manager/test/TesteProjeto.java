@@ -65,6 +65,11 @@ public class TesteProjeto {
     }
     
     @Test
+    public void testeDeEditarProjeto(){
+        
+    }
+    
+    @Test
     public void testeDeListarProjeto(){
     
         ArrayList<Projeto> projetos = Facade.listarProjeto();
